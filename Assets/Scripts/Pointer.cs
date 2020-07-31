@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Pointer : MonoBehaviour
 {
-    public float m_DefaultLength = 12.0f;
+    public float m_DefaultLength = 6.0f;
+    
     public GameObject m_Dot;
     public InputModule m_InputModule;
     private LineRenderer m_LineRenderer = null;
@@ -14,12 +15,12 @@ public class Pointer : MonoBehaviour
     private Vector3 EndPosition;
 
     public RaycastHit hitedRay;
-    private void Awake()
+    
+    private void Awake()    
     {
         m_LineRenderer = GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         UpdateLine();
@@ -31,7 +32,7 @@ public class Pointer : MonoBehaviour
         PointerEventData data = m_InputModule.GetData(); 
         float TargetLength = data.pointerCurrentRaycast.distance == 0 ? m_DefaultLength : data.pointerCurrentRaycast.distance;
         //Raycast
-        hitedRay = createRaycast(TargetLength);
+        hitedRay = CreateRaycast(TargetLength);
         //Default
         EndPosition = transform.position + (transform.forward * TargetLength);
         //Update when hitting something (Check for collider)
@@ -49,7 +50,7 @@ public class Pointer : MonoBehaviour
 
     }
 
-    private RaycastHit createRaycast(float length)
+    private RaycastHit CreateRaycast(float length)
     {
         RaycastHit hit;
         Ray ray = new Ray(transform.position,transform.forward);
@@ -58,13 +59,12 @@ public class Pointer : MonoBehaviour
         return hit;
     }
 
+    
+    
     public Transform HitedObject()
     {
-        if (hitedRay.transform != null)
-        {
-            Debug.Log(hitedRay.transform.name);
+        if(hitedRay.transform != null)
             return hitedRay.transform;
-        }
         return null;
     }
     

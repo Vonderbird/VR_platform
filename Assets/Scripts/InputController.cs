@@ -11,6 +11,8 @@ public class InputController : MonoBehaviour
     public Pointer pointerRef;
 
     public Transform generatedObj;
+    public bool objectAttached = false;
+
     void Update()
     {
         if (SteamVR_Actions._default.MenuUI.GetLastActive(SteamVR_Input_Sources.Any))
@@ -18,42 +20,38 @@ public class InputController : MonoBehaviour
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
         }
         // Release the object with trigger
-        if (SteamVR_Actions._default.GrabPinch.GetLastStateDown(SteamVR_Input_Sources.Any))
-        {
-            if (generatedObj != null)
-            {
-                generatedObj.parent = null;
-                generatedObj = null;
-            }
-        }
-
-        if (SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any))
-        {
-            AttachObject();
-        }
-
-        ChangeRayLength();
-
+        bool triggerState = SteamVR_Actions._default.GrabPinch.GetLastState(SteamVR_Input_Sources.Any);
+        GrabReleaseObject(triggerState);
     }
     
     public void InstantiateObject(Transform objectPrefab)
     {
-        generatedObj = Instantiate(objectPrefab, pointerRef.GetEndPosition() , rightController.transform.rotation, rightController.transform);
+        generatedObj = Instantiate(objectPrefab,
+            pointerRef.GetEndPosition() - (pointerRef.transform.forward * 6.0f),
+            rightController.transform.rotation,
+            rightController.transform);
+        
     }
 
-    public void ChangeRayLength()
-    {
-        pointerRef.m_DefaultLength = (generatedObj == null) ? 12.0f : 5.0f;
-    }
 
-    public void AttachObject()
+    public void GrabReleaseObject(bool triggerState)
     {
+        // if no object attached to controller
         Transform obj = pointerRef.HitedObject();
-        if (obj.GetComponent<ObjectScript>())
+        // if ray hits not movable object -> return from function
+        
+        if (triggerState && !objectAttached)
         {
-            obj.GetComponent<ObjectScript>().attached = true;
-            obj.parent = rightController.transform;
-            Debug.Log(obj.name+ " attached to : "+obj.parent.name);
+                // obj.GetComponent<ObjectScript>().attached = true;
+                obj.parent = rightController.transform;
+                objectAttached = true;
+        }
+        else if(!triggerState && objectAttached)
+        {
+                // obj.GetComponent<ObjectScript>().attached = false;
+                obj.parent = null;
+                objectAttached = false;
         }
     }
+    
 }

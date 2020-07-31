@@ -7,13 +7,6 @@ public class ObjectScript : MonoBehaviour
 {
     public bool attached;
 
-    private void Update()
-    {
-        // updateAttachedState();
-    }
-
-    // public void updateAttachedState()
-    // {
-    //     attached = (transform.parent != null) ? true : false;
-    // }
+    
+   
 }
