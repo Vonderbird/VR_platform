@@ -59,9 +59,8 @@ public class Pointer : MonoBehaviour
     
     public Transform FindObject()
     {
-        if(!isRayHited)
-            return null;            
-        return hitedRay.transform;
+        if(isRayHited)
+            return hitedRay.transform;
     }
     
     public Vector3 GetEndPosition()

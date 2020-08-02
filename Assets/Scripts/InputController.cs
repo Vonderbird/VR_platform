@@ -36,7 +36,7 @@ public class InputController : MonoBehaviour
     {
         // if no object attached to controller
         Transform obj = pointerRef.FindObject();
-        if(obj.tag.Equals(movableObjectTag))
+        if(obj && obj.tag.Equals(movableObjectTag))
         {
             if (triggerState && !objectAttached)
             {
