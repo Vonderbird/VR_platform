@@ -6,15 +6,15 @@ using UnityEngine.EventSystems;
 
 public class Pointer : MonoBehaviour
 {
-    public float m_DefaultLength = 6.0f;
-    
+    public float m_DefaultLength = 12.0f;
     public GameObject m_Dot;
     public InputModule m_InputModule;
+    public RaycastHit hitedRay;             // the ray which will check for collision object
+
     private LineRenderer m_LineRenderer = null;
-
     private Vector3 EndPosition;
+    private bool isRayHited;
 
-    public RaycastHit hitedRay;
     
     private void Awake()    
     {
@@ -46,26 +46,22 @@ public class Pointer : MonoBehaviour
         //Set position of LineRenderer
         m_LineRenderer.SetPosition(0, transform.position);
         m_LineRenderer.SetPosition(1, EndPosition);
-        
-
     }
 
     private RaycastHit CreateRaycast(float length)
     {
-        RaycastHit hit;
         Ray ray = new Ray(transform.position,transform.forward);
-        Physics.Raycast(ray, out hit, m_DefaultLength);
+        isRayHited = Physics.Raycast(ray, out hitedRay, m_DefaultLength);
         
-        return hit;
+        return hitedRay;
     }
 
     
-    
-    public Transform HitedObject()
+    public Transform FindObject()
     {
-        if(hitedRay.transform != null)
-            return hitedRay.transform;
-        return null;
+        if(!isRayHited)
+            return null;            
+        return hitedRay.transform;
     }
     
     public Vector3 GetEndPosition()
