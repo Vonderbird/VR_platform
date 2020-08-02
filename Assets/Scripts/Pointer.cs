@@ -10,7 +10,7 @@ public class Pointer : MonoBehaviour
     public GameObject m_Dot;
     public InputModule m_InputModule;
     public RaycastHit hitedRay;             // the ray which will check for collision object
-
+    public Transform hitedObject;
     private LineRenderer m_LineRenderer = null;
     private Vector3 EndPosition;
     private bool isRayHited;
@@ -52,17 +52,15 @@ public class Pointer : MonoBehaviour
     {
         Ray ray = new Ray(transform.position,transform.forward);
         isRayHited = Physics.Raycast(ray, out hitedRay, m_DefaultLength);
-        
+        if(isRayHited)
+        {
+            hitedObject = hitedRay.transform;
+        }
         return hitedRay;
     }
 
     
-    public Transform FindObject()
-    {
-        if(isRayHited)
-            return hitedRay.transform;
-    }
-    
+
     public Vector3 GetEndPosition()
     {
         return EndPosition;
