@@ -60,8 +60,8 @@
     <Compile Include="Assets\Art\AllSkyFree\AllSkyFree_Menu.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\InputModule.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
-    <Compile Include="Assets\Scripts\ObjectScript.cs" />
     <Compile Include="Assets\Scripts\OptionMenu.cs" />
     <Compile Include="Assets\Scripts\Panels.cs" />
     <Compile Include="Assets\Scripts\Pointer.cs" />

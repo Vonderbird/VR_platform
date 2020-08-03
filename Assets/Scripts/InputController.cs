@@ -15,12 +15,14 @@ public class InputController : MonoBehaviour
     public string movableObjectTag;
     void Update()
     {
+        // show tool menu
         if (SteamVR_Actions._default.MenuUI.GetLastActive(SteamVR_Input_Sources.Any))
         {
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
         }
+
         // Release the object with trigger
-        GrabReleaseObject(SteamVR_Actions._default.GrabPinch.GetLastState(SteamVR_Input_Sources.Any));
+        GrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
     
     public void InstantiateObject(Transform objectPrefab)
@@ -31,21 +33,20 @@ public class InputController : MonoBehaviour
             rightController.transform);
     }
 
-
     public void GrabReleaseObject(bool triggerState)
     {
         // if no object attached to controller
         if(pointerRef.hitedObject && pointerRef.hitedObject.tag.Equals(movableObjectTag))
         {
-            if (triggerState && !objectAttached)
+            if (triggerState)
             {
-                    pointerRef.hitedObject.parent = rightController.transform;
-                    objectAttached = true;
+                pointerRef.hitedObject.parent = rightController.transform;
+                objectAttached = true;
             }
-            else if(!triggerState && objectAttached)
+            else
             {
-                    pointerRef.hitedObject.parent = null;
-                    objectAttached = false;
+                pointerRef.hitedObject.parent = null;
+                objectAttached = false;
             }
         }
     }
