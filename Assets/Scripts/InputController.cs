@@ -12,7 +12,8 @@ public class InputController : MonoBehaviour
 
     public Transform generatedObj;
     public bool objectAttached = false;
-    public string movableObjectTag;
+    public string interactableObjectTag;
+
     void Update()
     {
         // show tool menu
@@ -25,18 +26,23 @@ public class InputController : MonoBehaviour
         GrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
     
+
+
+
     public void InstantiateObject(Transform objectPrefab)
     {
         generatedObj = Instantiate(objectPrefab,
-            pointerRef.GetEndPosition() - (pointerRef.transform.forward * 6.0f),
+            pointerRef.GetEndPosition() - (pointerRef.transform.forward * 3.0f),
             rightController.transform.rotation,
             rightController.transform);
+
+        Debug.Log("instantiated object : " + generatedObj.name + " parent: " + generatedObj.parent);
     }
 
     public void GrabReleaseObject(bool triggerState)
     {
         // if no object attached to controller
-        if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().tag.Equals(movableObjectTag))
+        if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().CompareTag(interactableObjectTag))
         {
             if (triggerState)
             {

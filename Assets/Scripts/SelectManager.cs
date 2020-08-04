@@ -26,6 +26,7 @@ public class SelectManager : MonoBehaviour
             var renderer = selectedObj.GetComponent<Renderer>();
             renderer.material = defaultMaterial;
             selectedObj = null;
+            
         }
         // highlight
         Transform obj = pointerRef.GetHitedObject();
@@ -39,5 +40,11 @@ public class SelectManager : MonoBehaviour
             selectedObj = obj;
         }
     }
+
+    public void Pickup()
+    {
+
+    }
+
    
 }
