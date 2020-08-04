@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\InputModule.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Pointer.cs" />
+    <Compile Include="Assets\Scripts\SelectManager.cs" />
     <Compile Include="Assets\Scripts\Teleporter.cs" />
     <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
     <Compile Include="Assets\Scripts\UI\OptionMenu.cs" />
@@ -92,17 +93,17 @@
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.quicksearch">
       <HintPath>D:/Work/Dev/VR_platform/Library/ScriptAssemblies/com.unity.quicksearch.dll</HintPath>

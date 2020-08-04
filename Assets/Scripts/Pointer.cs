@@ -10,7 +10,7 @@ public class Pointer : MonoBehaviour
     public GameObject m_Dot;
     public InputModule m_InputModule;
     public RaycastHit hitedRay;             // the ray which will check for collision object
-    public Transform hitedObject;
+    private Transform hitedObject;
     private LineRenderer m_LineRenderer = null;
     private Vector3 EndPosition;
     
@@ -57,7 +57,10 @@ public class Pointer : MonoBehaviour
     }
 
     
-
+    public Transform GetHitedObject()
+    {
+        return hitedObject;
+    }
     public Vector3 GetEndPosition()
     {
         return EndPosition;

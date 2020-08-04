@@ -36,16 +36,16 @@ public class InputController : MonoBehaviour
     public void GrabReleaseObject(bool triggerState)
     {
         // if no object attached to controller
-        if(pointerRef.hitedObject && pointerRef.hitedObject.tag.Equals(movableObjectTag))
+        if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().tag.Equals(movableObjectTag))
         {
             if (triggerState)
             {
-                pointerRef.hitedObject.parent = rightController.transform;
+                pointerRef.GetHitedObject().parent = rightController.transform;
                 objectAttached = true;
             }
             else
             {
-                pointerRef.hitedObject.parent = null;
+                pointerRef.GetHitedObject().parent = null;
                 objectAttached = false;
             }
         }

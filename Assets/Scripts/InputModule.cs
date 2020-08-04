@@ -7,7 +7,7 @@ using Valve.VR;
 public class InputModule : BaseInputModule
 {
 
-    public Camera camera;
+    public Camera cameras;
 
     public SteamVR_Input_Sources targetSource;
 
@@ -27,7 +27,7 @@ public class InputModule : BaseInputModule
     {
         // reset data, set camera
         data.Reset();    
-        data.position = new Vector2(camera.pixelWidth /2, camera.pixelHeight/2);
+        data.position = new Vector2(GetComponent<Camera>().pixelWidth /2, GetComponent<Camera>().pixelHeight/2);
         // raycast
         eventSystem.RaycastAll(data, m_RaycastResultCache);
         data.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);
