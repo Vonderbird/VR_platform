@@ -25,6 +25,7 @@ public class SelectManager : MonoBehaviour
         {
             var renderer = selectedObj.GetComponent<Renderer>();
             renderer.material = defaultMaterial;
+            defaultMaterial = null;
             selectedObj = null;
             
         }
@@ -35,6 +36,7 @@ public class SelectManager : MonoBehaviour
             var Renderer = obj.GetComponent<Renderer>();
             if(Renderer != null)
             {
+                defaultMaterial = Renderer.material;
                 Renderer.material = highlightMaterial;
             }
             selectedObj = obj;
