@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4508970561002598}
   - component: {fileID: 33958223943529026}
   - component: {fileID: 23603303965915310}
+  - component: {fileID: 65487507616776048}
   m_Layer: 0
   m_Name: Plant_6
   m_TagString: interactable
@@ -78,3 +79,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &65487507616776048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228419803925864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.84034896, y: 0.6849088, z: 0.84034896}
+  m_Center: {x: 0, y: 0.3278937, z: 0.000000029802322}
