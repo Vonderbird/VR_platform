@@ -13,8 +13,6 @@ public class Pointer : MonoBehaviour
     public Transform hitedObject;
     private LineRenderer m_LineRenderer = null;
     private Vector3 EndPosition;
-    private bool isRayHited;
-
     
     private void Awake()    
     {
@@ -51,8 +49,7 @@ public class Pointer : MonoBehaviour
     private RaycastHit CreateRaycast(float length)
     {
         Ray ray = new Ray(transform.position,transform.forward);
-        isRayHited = Physics.Raycast(ray, out hitedRay, m_DefaultLength);
-        if(isRayHited)
+        if(Physics.Raycast(ray, out hitedRay, m_DefaultLength))
         {
             hitedObject = hitedRay.transform;
         }

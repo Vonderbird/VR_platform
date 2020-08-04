@@ -12,7 +12,7 @@ public class InputModule : BaseInputModule
     public SteamVR_Input_Sources targetSource;
 
     public SteamVR_Action_Boolean clickAction;
-
+    
     private GameObject currentObject = null;
 
     private PointerEventData data = null;
@@ -32,13 +32,17 @@ public class InputModule : BaseInputModule
         eventSystem.RaycastAll(data, m_RaycastResultCache);
         data.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);
         currentObject = data.pointerCurrentRaycast.gameObject;
+
         // clear raycast
         m_RaycastResultCache.Clear();
+
         //hover
         HandlePointerExitAndEnter(data, currentObject);
+
         //press
         if(clickAction.GetStateDown(targetSource))
             ProcessPress(data);
+
         //release
         if(clickAction.GetStateUp(targetSource))
             ProcessRelease(data);
@@ -87,13 +91,6 @@ public class InputModule : BaseInputModule
         data.pressPosition = Vector2.zero;
         data.pointerPress = null;
         data.rawPointerPress = null;
-        
     }
-    
-    
-    // Update is called once per frame
-    void Update()
-    {
-            
-    }
+ 
 }
