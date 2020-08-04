@@ -17,6 +17,9 @@ public class Pointer : MonoBehaviour
     private void Awake()    
     {
         m_LineRenderer = GetComponent<LineRenderer>();
+        
+        // set position of pointer to center of controller
+        gameObject.transform.position = gameObject.transform.parent.position;
     }
 
     private void Update()
@@ -53,7 +56,7 @@ public class Pointer : MonoBehaviour
     private RaycastHit CreateRaycast(float length)
     {
         Ray ray = new Ray(transform.position,transform.forward);
-        
+
         if(Physics.Raycast(ray, out hitedRay, m_DefaultLength))
         {
             hitedObject = hitedRay.transform;
