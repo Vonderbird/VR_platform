@@ -9,25 +9,23 @@ public class SelectManager : MonoBehaviour
     public Pointer pointerRef;
     [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material defaultMaterial;
-    private Transform selectedObj;
+    private Transform highlightedObject = null;
 
 
     void Update() 
     {
-        
         HighlightObject();
     }
 
     void HighlightObject()
     {
         // dehighlight
-        if(selectedObj != null)
+        if(highlightedObject != null)
         {
-            var renderer = selectedObj.GetComponent<Renderer>();
+            var renderer = highlightedObject.GetComponent<Renderer>();
             renderer.material = defaultMaterial;
             defaultMaterial = null;
-            selectedObj = null;
-            
+            highlightedObject = null;
         }
         // highlight
         Transform obj = pointerRef.GetHitedObject();
@@ -41,7 +39,7 @@ public class SelectManager : MonoBehaviour
             defaultMaterial = Renderer.material;
             Renderer.material = highlightMaterial;
 
-            selectedObj = obj;
+            highlightedObject = obj;
         }
     }
 
