@@ -80,11 +80,6 @@
     {
       "name": "/actions/buggy/in/Reset",
       "type": "boolean"
-    },
-    {
-      "name": "/actions/mixedreality/in/ExternalCamera",
-      "type": "pose",
-      "requirement": "optional"
     }
   ],
   "action_sets": [
@@ -98,10 +93,6 @@
     },
     {
       "name": "/actions/buggy",
-      "usage": "single"
-    },
-    {
-      "name": "/actions/mixedreality",
       "usage": "single"
     }
   ],
