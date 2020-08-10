@@ -34,11 +34,13 @@ public class SelectManager : MonoBehaviour
         if(obj.CompareTag(interactableTag))
         {
             var Renderer = obj.GetComponent<Renderer>();
-            if(Renderer != null)
-            {
-                defaultMaterial = Renderer.material;
-                Renderer.material = highlightMaterial;
-            }
+
+            if(Renderer == null)
+                return;
+                
+            defaultMaterial = Renderer.material;
+            Renderer.material = highlightMaterial;
+
             selectedObj = obj;
         }
     }
