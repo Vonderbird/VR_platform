@@ -23,7 +23,6 @@ public class OptionMenu : MonoBehaviour
     public Pointer pointerRef;
     public Button deleteButton;
     public Slider gravitySlider;
-    public Hand hand;
     private void OnEnable()
     {
         if (OpenOptionAction == null)
