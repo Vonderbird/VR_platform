@@ -19,16 +19,19 @@ public class SelectManager : MonoBehaviour
 
     void HighlightObject()
     {
+        Transform obj = pointerRef.GetHitedObject();
         // dehighlight
         if(highlightedObject != null)
         {
+            if (highlightedObject.GetInstanceID() == obj.GetInstanceID())
+                return;
+            
             var renderer = highlightedObject.GetComponent<Renderer>();
             renderer.material = defaultMaterial;
             defaultMaterial = null;
             highlightedObject = null;
         }
         // highlight
-        Transform obj = pointerRef.GetHitedObject();
         if(obj.CompareTag(interactableTag))
         {
             var Renderer = obj.GetComponent<Renderer>();
