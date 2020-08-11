@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////
+// desc:    Highlight object with selected with pointer
+//
+// author:  amirardroudi
+//////////////////////////////////////////////////////
+/// 
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,17 +26,7 @@ public class SelectManager : MonoBehaviour
     void HighlightObject()
     {
         Transform obj = pointerRef.GetHitedObject();
-        // dehighlight
-        if(highlightedObject != null)
-        {
-            if (highlightedObject.GetInstanceID() == obj.GetInstanceID())
-                return;
-            
-            var renderer = highlightedObject.GetComponent<Renderer>();
-            renderer.material = defaultMaterial;
-            defaultMaterial = null;
-            highlightedObject = null;
-        }
+        
         // highlight
         if(obj.CompareTag(interactableTag))
         {
@@ -44,12 +40,19 @@ public class SelectManager : MonoBehaviour
 
             highlightedObject = obj;
         }
+        // dehighlight
+
+        if(highlightedObject != null)
+        {
+            if (highlightedObject.GetInstanceID() == obj.GetInstanceID())
+                return;
+            
+            var renderer = highlightedObject.GetComponent<Renderer>();
+            renderer.material = defaultMaterial;
+            defaultMaterial = null;
+            highlightedObject = null;
+        }
     }
 
-    public void Pickup()
-    {
 
-    }
-
-   
 }
