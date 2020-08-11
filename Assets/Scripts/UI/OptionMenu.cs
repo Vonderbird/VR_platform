@@ -11,16 +11,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
+
 public class OptionMenu : MonoBehaviour
 {
     public SteamVR_Action_Boolean OpenOptionAction;
     public Transform SelectedObject;
     public bool OptionMenuIsVisible = false;
 
+    public Transform headset;
     public Pointer pointerRef;
     public Button deleteButton;
     public Slider gravitySlider;
-    
+    public Hand hand;
     private void OnEnable()
     {
         if (OpenOptionAction == null)
@@ -28,18 +31,22 @@ public class OptionMenu : MonoBehaviour
             Debug.LogError("<b>[StreamVR Interaction]</b> No open OptionMenu action assigned!");
             return;
         }
-        OpenOptionAction.AddOnChangeListener(ActiveOptionMenu,SteamVR_Input_Sources.Any);
+        OpenOptionAction.AddOnChangeListener(ActiveOptionMenu, SteamVR_Input_Sources.RightHand);
     }
 
     private void OnDisable()
     {
         if(OpenOptionAction != null)
-            OpenOptionAction.RemoveOnChangeListener(ActiveOptionMenu,SteamVR_Input_Sources.Any);
+            OpenOptionAction.RemoveOnChangeListener(ActiveOptionMenu,SteamVR_Input_Sources.RightHand);
     }
 
     private void Update()
     {
         SelectedObject = pointerRef.GetHitedObject();
+        if (SteamVR_Actions._default.OptionMenu.stateDown)
+        {
+            Debug.Log("option menu button clicked");
+        }
     }
 
     private void ActiveOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
@@ -65,7 +72,18 @@ public class OptionMenu : MonoBehaviour
             gravitySlider.value = SelectedObject.GetComponent<Rigidbody>().mass;    
         }
     }
+    
+    // set position and rotation of option menu related to VR headset and selected object
+    private void SetOptionMenuPos()
+    {
+        //SelectedObject.position()
+            
+    }
 
+    private void UpdateRotation()
+    {
+        transform.LookAt(headset);
+    }
     private void DestroyObject()
     {
         SelectedObject.GetComponent<Interactable>().DestroyObject();

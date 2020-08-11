@@ -12,9 +12,10 @@ using UnityEngine;
 public class SelectManager : MonoBehaviour
 {
     [SerializeField] private string interactableTag = "interactable";
-    public Pointer pointerRef;
     [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material defaultMaterial;
+    
+    public Pointer pointerRef;
     private Transform highlightedObject = null;
 
 
@@ -26,6 +27,18 @@ public class SelectManager : MonoBehaviour
     void HighlightObject()
     {
         Transform obj = pointerRef.GetHitedObject();
+        
+        // dehighlight
+        if(highlightedObject != null)
+        {
+            if (highlightedObject.GetInstanceID() == obj.GetInstanceID())
+                return;
+            
+            var renderer = highlightedObject.GetComponent<Renderer>();
+            renderer.material = defaultMaterial;
+            defaultMaterial = null;
+            highlightedObject = null;
+        }
         
         // highlight
         if(obj.CompareTag(interactableTag))
@@ -40,19 +53,6 @@ public class SelectManager : MonoBehaviour
 
             highlightedObject = obj;
         }
-        // dehighlight
-
-        if(highlightedObject != null)
-        {
-            if (highlightedObject.GetInstanceID() == obj.GetInstanceID())
-                return;
-            
-            var renderer = highlightedObject.GetComponent<Renderer>();
-            renderer.material = defaultMaterial;
-            defaultMaterial = null;
-            highlightedObject = null;
-        }
+        
     }
-
-
 }
