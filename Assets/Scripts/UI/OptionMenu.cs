@@ -9,13 +9,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Valve.VR;
 public class OptionMenu : MonoBehaviour
 {
     public SteamVR_Action_Boolean OpenOptionAction;
-    public GameObject SelectedObject;
+    public Transform SelectedObject;
     public bool OptionMenuIsVisible = false;
 
+    public Pointer pointerRef;
+    public Button deleteButton;
+    public Slider gravitySlider;
+    
     private void OnEnable()
     {
         if (OpenOptionAction == null)
@@ -32,25 +37,40 @@ public class OptionMenu : MonoBehaviour
             OpenOptionAction.RemoveOnChangeListener(ActiveOptionMenu,SteamVR_Input_Sources.Any);
     }
 
+    private void Update()
+    {
+        SelectedObject = pointerRef.GetHitedObject();
+    }
+
     private void ActiveOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
-        this.GetComponent<Canvas>().enabled = newValue;
+        GetComponent<Canvas>().enabled = newValue;
+        
         if (newValue)
         {
             SyncOptionToObject();
         }
 
-        Debug.Log("showoption button status: " + newValue);
+        Debug.Log("Option button clicked: " + newValue);
     }
     
     private void SyncOptionToObject()
     {
+        // Bind Destroy function to delete button
+        deleteButton.onClick.AddListener(DestroyObject);
         
+        // set slider value from mass of selected object rigidbody.mass
+        if (SelectedObject.GetComponent<Rigidbody>() != null)
+        {
+            gravitySlider.value = SelectedObject.GetComponent<Rigidbody>().mass;    
+        }
     }
-    
-    public void DestroyObject()
+
+    private void DestroyObject()
     {
         SelectedObject.GetComponent<Interactable>().DestroyObject();
     }
+
+    
     
 }
