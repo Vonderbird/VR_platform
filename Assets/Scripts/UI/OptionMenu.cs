@@ -42,12 +42,11 @@ public class OptionMenu : MonoBehaviour
     private void Update()
     {
         SelectedObject = pointerRef.GetHitedObject();
-        if (SteamVR_Actions._default.OptionMenu.stateDown)
-        {
-            Debug.Log("option menu button clicked");
-        }
+        // set rotation of option menu related to camera
+        UpdateRotation();
     }
 
+    // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
     private void ActiveOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
         GetComponent<Canvas>().enabled = newValue;
@@ -57,8 +56,8 @@ public class OptionMenu : MonoBehaviour
             SyncOptionToObject();
         }
 
-        Debug.Log("Option button clicked: " + newValue);
     }
+    // ================================================================================
     
     private void SyncOptionToObject()
     {
@@ -70,19 +69,23 @@ public class OptionMenu : MonoBehaviour
         {
             gravitySlider.value = SelectedObject.GetComponent<Rigidbody>().mass;    
         }
+
+        SetOptionMenuPos();
     }
     
-    // set position and rotation of option menu related to VR headset and selected object
+    // ====================== OPTION MENU POSITION ======================  
     private void SetOptionMenuPos()
     {
-        //SelectedObject.position()
-            
+        transform.position = SelectedObject.position + Vector3.right * 2.0f;
     }
 
+    // ====================== OPTION MENU POSITION ======================  
     private void UpdateRotation()
     {
         transform.LookAt(headset);
     }
+
+    
     private void DestroyObject()
     {
         SelectedObject.GetComponent<Interactable>().DestroyObject();
