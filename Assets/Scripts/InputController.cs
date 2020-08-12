@@ -27,12 +27,12 @@ public class InputController : MonoBehaviour
             Debug.LogError("<b>[StreamVR Interaction]</b> Grab action assigned!");
             return;
         }
-        grabAction.AddOnChangeListener(GrabReleaseObject, SteamVR_Input_Sources.Any);
+        grabAction.AddOnChangeListener(GrabReleaseObject, SteamVR_Input_Sources.RightHand);
     }
     private void OnDisable()
     {
         if(grabAction != null)
-            grabAction.RemoveOnChangeListener(GrabReleaseObject ,SteamVR_Input_Sources.Any);
+            grabAction.RemoveOnChangeListener(GrabReleaseObject ,SteamVR_Input_Sources.RightHand);
     }
 
 
@@ -40,10 +40,10 @@ public class InputController : MonoBehaviour
     void Update()
     {
         // show tool menu
-        if (SteamVR_Actions._default.MenuUI.GetLastActive(SteamVR_Input_Sources.Any))
+        /*if (SteamVR_Actions._default.MenuUI.GetLastActive(SteamVR_Input_Sources.Any))
         {
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
-        }
+        }*/
 
         hittedObj = pointerRef.transform;
         // Release the object with trigger
@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour
         
         if (newValue)
         {
-            Debug.Log("Grab action event called on state " + newValue );
+            Debug.Log( hittedObj + "Object is about to be grabbed!" );
 //            if (!hittedObj.CompareTag(interactableObjTag)) return;
             hittedObj.parent = rightController.transform;
             objectAttached = true;
