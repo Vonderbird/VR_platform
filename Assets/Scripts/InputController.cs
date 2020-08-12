@@ -44,7 +44,8 @@ public class InputController : MonoBehaviour
         {
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
         }
-        
+
+        hittedObj = pointerRef.transform;
         // Release the object with trigger
         // SteamVR_ActionsGrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
@@ -58,7 +59,7 @@ public class InputController : MonoBehaviour
 
     private void GrabReleaseObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources  inputSources, bool newValue)
     {
-        hittedObj = pointerRef.transform;
+        
         if (newValue)
         {
             Debug.Log("Grab action event called on state " + newValue );
