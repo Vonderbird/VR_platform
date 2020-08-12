@@ -50,7 +50,7 @@ public class InputController : MonoBehaviour
                 pointerRef.GetHitedObject().parent = rightController.transform;
                 objectAttached = true;
             }
-            else if ( objectAttached == true)
+            else if (objectAttached == true)
             {
                 pointerRef.GetHitedObject().parent = null;
                 objectAttached = false;
