@@ -49,12 +49,13 @@ public class OptionMenu : MonoBehaviour
     {
         // set rotation of option menu related to camera
         UpdateRotation();
+        SelectedObject = pointerRef.GetHitedObject();
+
     }
 
     // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
     private void ActivateOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
-        SelectedObject = pointerRef.GetHitedObject();
         GetComponent<Canvas>().enabled = newValue;
         
         if (newValue)
@@ -92,7 +93,7 @@ public class OptionMenu : MonoBehaviour
     }
 
     
-    private void DestroyObject()
+    public void DestroyObject()
     {
         var options = SelectedObject.GetComponent<Interactable>();
         if(options != null)
