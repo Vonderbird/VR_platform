@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class InputController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class InputController : MonoBehaviour
     
     public SteamVR_Action_Boolean grabAction;
     private Transform hittedObj;
-    
+    public Hand hand;
     private void Awake()
     {
         objectAttached = false;
@@ -24,15 +25,15 @@ public class InputController : MonoBehaviour
     {
         if (grabAction == null)
         {
-            Debug.LogError("<b>[StreamVR Interaction]</b> Grab action assigned!");
+            Debug.LogError("<b>[StreamVR Interaction]</b> Grab action assigned!", this);
             return;
         }
-        grabAction.AddOnChangeListener(GrabReleaseObject, SteamVR_Input_Sources.RightHand);
+        grabAction.AddOnChangeListener(GrabReleaseObject, hand.handType);
     }
     private void OnDisable()
     {
         if(grabAction != null)
-            grabAction.RemoveOnChangeListener(GrabReleaseObject ,SteamVR_Input_Sources.RightHand);
+            grabAction.RemoveOnChangeListener(GrabReleaseObject , hand.handType);
     }
 
 
@@ -45,7 +46,7 @@ public class InputController : MonoBehaviour
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
         }*/
 
-        hittedObj = pointerRef.transform;
+        hittedObj = pointerRef.GetHitedObject();
         // Release the object with trigger
         // SteamVR_ActionsGrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
@@ -62,7 +63,7 @@ public class InputController : MonoBehaviour
         
         if (newValue)
         {
-            Debug.Log( hittedObj + "Object is about to be grabbed!" );
+            Debug.Log( hittedObj + " - Object is about to be grabbed!" );
 //            if (!hittedObj.CompareTag(interactableObjTag)) return;
             hittedObj.parent = rightController.transform;
             objectAttached = true;

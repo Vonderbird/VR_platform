@@ -55,7 +55,7 @@ public class OptionMenu : MonoBehaviour
     // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
     private void ActivateOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
-        SelectedObject = pointerRef.hitedRay.transform;
+        SelectedObject = pointerRef.GetHitedObject();
         GetComponent<Canvas>().enabled = newValue;
         
         if (newValue)
