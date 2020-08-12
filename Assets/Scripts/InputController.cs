@@ -48,9 +48,6 @@ public class InputController : MonoBehaviour
         // Release the object with trigger
         // SteamVR_ActionsGrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
-    
-
-
 
     public void InstantiateObject(Transform objectPrefab)
     {
@@ -64,11 +61,10 @@ public class InputController : MonoBehaviour
         hittedObj = pointerRef.transform;
         if (newValue)
         {
-            if (hittedObj.CompareTag(interactableObjTag))
-            {
-                hittedObj.parent = rightController.transform;
-                objectAttached = true;
-            }
+            Debug.Log("Grab action event called on state " + newValue );
+//            if (!hittedObj.CompareTag(interactableObjTag)) return;
+            hittedObj.parent = rightController.transform;
+            objectAttached = true;
         }
         // if grab released
         else
@@ -76,9 +72,6 @@ public class InputController : MonoBehaviour
             hittedObj.parent = null;
             objectAttached = false;
         }
-
-
-
 
         /*
         // if no object attached to controller
