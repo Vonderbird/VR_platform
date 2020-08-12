@@ -23,6 +23,13 @@ public class OptionMenu : MonoBehaviour
     public Pointer pointerRef;
     public Button deleteButton;
     public Slider gravitySlider;
+
+    private Quaternion orginalRotation;
+
+    private void Awake() 
+    {
+        orginalRotation = transform.rotation;    
+    }
     private void OnEnable()
     {
         if (OpenOptionAction == null)
@@ -82,7 +89,9 @@ public class OptionMenu : MonoBehaviour
     // ====================== OPTION MENU POSITION ======================  
     private void UpdateRotation()
     {
-        transform.LookAt(headset);
+        //transform.LookAt(headset);
+        transform.rotation = headset.rotation * orginalRotation;
+        // transform.rotation = Quaternion.LookRotation(transform.position - headset.transform.position);
     }
 
     

@@ -14,6 +14,8 @@ public class InputController : MonoBehaviour
     public bool objectAttached = false;
     public string interactableObjectTag;
 
+
+    // TODO: change input system to events (Remove them from update method)
     void Update()
     {
         // show tool menu
@@ -43,12 +45,12 @@ public class InputController : MonoBehaviour
         // if no object attached to controller
         if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().CompareTag(interactableObjectTag))
         {
-            if (triggerState)
+            if (triggerState == true && objectAttached == false)
             {
                 pointerRef.GetHitedObject().parent = rightController.transform;
                 objectAttached = true;
             }
-            else
+            else if ( objectAttached == true)
             {
                 pointerRef.GetHitedObject().parent = null;
                 objectAttached = false;
