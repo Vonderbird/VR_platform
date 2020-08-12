@@ -16,6 +16,8 @@ using Valve.VR.InteractionSystem;
 public class OptionMenu : MonoBehaviour
 {
     public SteamVR_Action_Boolean OpenOptionAction;
+    public Hand hand;
+    
     public Transform SelectedObject;
     public bool OptionMenuIsVisible = false;
 
@@ -37,13 +39,13 @@ public class OptionMenu : MonoBehaviour
             Debug.LogError("<b>[StreamVR Interaction]</b> No open OptionMenu action assigned!");
             return;
         }
-        OpenOptionAction.AddOnChangeListener(ActivateOptionMenu, SteamVR_Input_Sources.RightHand);
+        OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  hand.handType);
     }
 
     private void OnDisable()
     {
         if(OpenOptionAction != null)
-            OpenOptionAction.RemoveOnChangeListener(ActivateOptionMenu,SteamVR_Input_Sources.RightHand);
+            OpenOptionAction.RemoveOnChangeListener(ActivateOptionMenu, hand.handType);
     }
 
     private void Update()

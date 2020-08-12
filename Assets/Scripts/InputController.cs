@@ -54,7 +54,7 @@ public class InputController : MonoBehaviour
     public void InstantiateObject(Transform objectPrefab)
     {
         generatedObj = Instantiate(objectPrefab,
-            pointerRef.GetEndPosition() - Vector3.back*1.5f,
+            pointerRef.GetEndPosition() - Vector3.up*1.3f,
             rightController.transform.rotation);
     }
 
