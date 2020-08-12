@@ -16,6 +16,8 @@ public class InputController : MonoBehaviour
     public SteamVR_Action_Boolean grabAction;
     private Transform hittedObj;
     public Hand hand;
+    
+    
     private void Awake()
     {
         objectAttached = false;
@@ -41,14 +43,12 @@ public class InputController : MonoBehaviour
     void Update()
     {
         // show tool menu
-        /*if (SteamVR_Actions._default.MenuUI.GetLastActive(SteamVR_Input_Sources.Any))
+        if (SteamVR_Actions._default.MenuUI.GetLastActive(SteamVR_Input_Sources.Any))
         {
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
-        }*/
+        }
 
         hittedObj = pointerRef.GetHitedObject();
-        // Release the object with trigger
-        // SteamVR_ActionsGrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
 
     public void InstantiateObject(Transform objectPrefab)
@@ -64,7 +64,7 @@ public class InputController : MonoBehaviour
         if (newValue)
         {
             Debug.Log( hittedObj + " - Object is about to be grabbed!" );
-//            if (!hittedObj.CompareTag(interactableObjTag)) return;
+            if (!hittedObj.CompareTag(interactableObjTag) && !objectAttached ) return;
             hittedObj.parent = rightController.transform;
             objectAttached = true;
         }
@@ -75,22 +75,6 @@ public class InputController : MonoBehaviour
             objectAttached = false;
         }
 
-        /*
-        // if no object attached to controller
-        if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().CompareTag(interactableObjectTag))
-        {
-            if (triggerState && objectAttached == false)
-            {
-                pointerRef.GetHitedObject().parent = rightController.transform;
-                objectAttached = true;
-            }
-            else
-            {
-                pointerRef.GetHitedObject().parent = null;
-                objectAttached = false;
-            }
-        }
-        */
     }
     
 }
