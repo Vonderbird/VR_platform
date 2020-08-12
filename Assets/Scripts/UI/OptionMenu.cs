@@ -37,26 +37,25 @@ public class OptionMenu : MonoBehaviour
             Debug.LogError("<b>[StreamVR Interaction]</b> No open OptionMenu action assigned!");
             return;
         }
-        OpenOptionAction.AddOnChangeListener(ActiveOptionMenu, SteamVR_Input_Sources.RightHand);
+        OpenOptionAction.AddOnChangeListener(ActivateOptionMenu, SteamVR_Input_Sources.RightHand);
     }
 
     private void OnDisable()
     {
         if(OpenOptionAction != null)
-            OpenOptionAction.RemoveOnChangeListener(ActiveOptionMenu,SteamVR_Input_Sources.RightHand);
+            OpenOptionAction.RemoveOnChangeListener(ActivateOptionMenu,SteamVR_Input_Sources.RightHand);
     }
 
     private void Update()
     {
-        SelectedObject = pointerRef.hitedRay.transform;
-        
         // set rotation of option menu related to camera
         UpdateRotation();
     }
 
     // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
-    private void ActiveOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
+    private void ActivateOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
+        SelectedObject = pointerRef.hitedRay.transform;
         GetComponent<Canvas>().enabled = newValue;
         
         if (newValue)
@@ -84,7 +83,7 @@ public class OptionMenu : MonoBehaviour
     // ====================== OPTION MENU POSITION ======================  
     private void SetOptionMenuPos()
     {
-        transform.position = SelectedObject.position + Vector3.right * 2.0f;
+        transform.position = SelectedObject.position + Vector3.right * 1.5f;
     }
 
     // ====================== OPTION MENU POSITION ======================  
@@ -96,8 +95,6 @@ public class OptionMenu : MonoBehaviour
     
     private void DestroyObject()
     {
-        Debug.Log("selected object is " + SelectedObject.name);
-
         var options = SelectedObject.GetComponent<Interactable>();
         if(options != null)
             options.DestroyObject();

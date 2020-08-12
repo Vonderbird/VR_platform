@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR;
 
 public class InputController : MonoBehaviour
@@ -13,13 +10,31 @@ public class InputController : MonoBehaviour
 
     public Transform generatedObj;
     public bool objectAttached;
-    public string interactableObjectTag;
-
-
+    public string interactableObjTag;
+    
+    public SteamVR_Action_Boolean grabAction;
+    private Transform hittedObj;
+    
     private void Awake()
     {
         objectAttached = false;
     }
+
+    private void OnEnable()
+    {
+        if (grabAction == null)
+        {
+            Debug.LogError("<b>[StreamVR Interaction]</b> Grab action assigned!");
+            return;
+        }
+        grabAction.AddOnChangeListener(GrabReleaseObject, SteamVR_Input_Sources.Any);
+    }
+    private void OnDisable()
+    {
+        if(grabAction != null)
+            grabAction.RemoveOnChangeListener(GrabReleaseObject ,SteamVR_Input_Sources.Any);
+    }
+
 
     // TODO: change input system to events (Remove them from update method)
     void Update()
@@ -29,9 +44,9 @@ public class InputController : MonoBehaviour
         {
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
         }
-
+        
         // Release the object with trigger
-        GrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
+        // SteamVR_ActionsGrabReleaseObject(SteamVR_Actions._default.GrabGrip.GetLastState(SteamVR_Input_Sources.Any));
     }
     
 
@@ -46,8 +61,28 @@ public class InputController : MonoBehaviour
         Debug.Log("instantiated object : " + generatedObj.name + " parent: " + generatedObj.parent);
     }
 
-    private void GrabReleaseObject(bool triggerState)
+    private void GrabReleaseObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources  inputSources, bool newValue )
     {
+        if (newValue)
+        {
+            hittedObj = pointerRef.GetHitedObject();
+            if (hittedObj.CompareTag(interactableObjTag) && !objectAttached)
+            {
+                hittedObj.parent = rightController.transform;
+                objectAttached = true;
+            }
+        }
+        // if grab released
+        else
+        {
+            hittedObj.parent = null;
+            objectAttached = false;
+        }
+
+
+
+
+        /*
         // if no object attached to controller
         if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().CompareTag(interactableObjectTag))
         {
@@ -62,6 +97,7 @@ public class InputController : MonoBehaviour
                 objectAttached = false;
             }
         }
+        */
     }
     
 }
