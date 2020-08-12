@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33631546342493948}
   - component: {fileID: 23753668411532500}
   - component: {fileID: 114727895053132592}
+  - component: {fileID: 64002026596834402}
   m_Layer: 0
   m_Name: Bush_3
   m_TagString: interactable
@@ -91,4 +92,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79466f74385c8934e9714fb0c8072c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
+--- !u!64 &64002026596834402
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309910605144772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 1e7949aa66587e540b15b43c6b92a25d, type: 3}

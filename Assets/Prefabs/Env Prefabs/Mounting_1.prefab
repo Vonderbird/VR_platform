@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33806761894796746}
   - component: {fileID: 23323909495853514}
   - component: {fileID: 64710742962647108}
-  - component: {fileID: 6960468505861222194}
+  - component: {fileID: 114686895287512260}
   m_Layer: 0
   m_Name: Mounting_1
   m_TagString: interactable
@@ -93,16 +93,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 7d626b52dc7a9c24e95f55619a456158, type: 3}
---- !u!65 &6960468505861222194
-BoxCollider:
+--- !u!114 &114686895287512260
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856861724390114}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 15.718052, y: 7.80433, z: 16.754356}
-  m_Center: {x: 0.07212329, y: 3.7449174, z: -0.37596893}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79466f74385c8934e9714fb0c8072c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

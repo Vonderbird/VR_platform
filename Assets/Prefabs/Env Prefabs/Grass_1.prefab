@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4856522368811236}
   - component: {fileID: 33321009862995994}
   - component: {fileID: 23866827820060464}
-  - component: {fileID: 2055375112987507729}
+  - component: {fileID: 136219146662367100}
+  - component: {fileID: 114143356373862554}
   m_Layer: 0
   m_Name: Grass_1
   m_TagString: interactable
@@ -78,8 +79,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2055375112987507729
-BoxCollider:
+--- !u!136 &136219146662367100
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -88,6 +89,19 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22407348, y: 0.5599399, z: 0.42846572}
+  m_Radius: 0.21423286
+  m_Height: 0.5599399
+  m_Direction: 1
   m_Center: {x: 0.0037346408, y: 0.26554534, z: 0.011832446}
+--- !u!114 &114143356373862554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943996455298776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79466f74385c8934e9714fb0c8072c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
