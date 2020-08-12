@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public bool selected;
     private Rigidbody rigidRef;
     private void OnEnable()
     {
-        if (GetComponent<Rigidbody>())
-            rigidRef = GetComponent<Rigidbody>();
+        var rigid = GetComponent<Rigidbody>();
+        if (rigid != null)
+            rigidRef = rigid;
     }
 
     public void DestroyObject()
@@ -20,8 +20,7 @@ public class Interactable : MonoBehaviour
 
     public void AddRigidBody(float gravityAmount)
     {
-        //if gravity slider was more than 0
-        
+        rigidRef = gameObject.AddComponent<Rigidbody>();
     }
 
     public void RemoveRigidBody()

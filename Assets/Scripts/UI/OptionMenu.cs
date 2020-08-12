@@ -48,7 +48,8 @@ public class OptionMenu : MonoBehaviour
 
     private void Update()
     {
-        SelectedObject = pointerRef.GetHitedObject();
+        SelectedObject = pointerRef.hitedRay.transform;
+        
         // set rotation of option menu related to camera
         UpdateRotation();
     }
@@ -89,15 +90,17 @@ public class OptionMenu : MonoBehaviour
     // ====================== OPTION MENU POSITION ======================  
     private void UpdateRotation()
     {
-        //transform.LookAt(headset);
         transform.rotation = headset.rotation * orginalRotation;
-        // transform.rotation = Quaternion.LookRotation(transform.position - headset.transform.position);
     }
 
     
     private void DestroyObject()
     {
-        SelectedObject.GetComponent<Interactable>().DestroyObject();
+        Debug.Log("selected object is " + SelectedObject.name);
+
+        var options = SelectedObject.GetComponent<Interactable>();
+        if(options != null)
+            options.DestroyObject();
     }
 
     

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
@@ -11,9 +12,14 @@ public class InputController : MonoBehaviour
     public Pointer pointerRef;
 
     public Transform generatedObj;
-    public bool objectAttached = false;
+    public bool objectAttached;
     public string interactableObjectTag;
 
+
+    private void Awake()
+    {
+        objectAttached = false;
+    }
 
     // TODO: change input system to events (Remove them from update method)
     void Update()
@@ -40,17 +46,17 @@ public class InputController : MonoBehaviour
         Debug.Log("instantiated object : " + generatedObj.name + " parent: " + generatedObj.parent);
     }
 
-    public void GrabReleaseObject(bool triggerState)
+    private void GrabReleaseObject(bool triggerState)
     {
         // if no object attached to controller
         if(pointerRef.GetHitedObject() && pointerRef.GetHitedObject().CompareTag(interactableObjectTag))
         {
-            if (triggerState == true && objectAttached == false)
+            if (triggerState && objectAttached == false)
             {
                 pointerRef.GetHitedObject().parent = rightController.transform;
                 objectAttached = true;
             }
-            else if (objectAttached == true)
+            else
             {
                 pointerRef.GetHitedObject().parent = null;
                 objectAttached = false;
