@@ -55,18 +55,16 @@ public class InputController : MonoBehaviour
     public void InstantiateObject(Transform objectPrefab)
     {
         generatedObj = Instantiate(objectPrefab,
-            pointerRef.GetEndPosition(),
+            pointerRef.GetEndPosition() - Vector3.back*1.5f,
             rightController.transform.rotation);
-
-        Debug.Log("instantiated object : " + generatedObj.name + " parent: " + generatedObj.parent);
     }
 
-    private void GrabReleaseObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources  inputSources, bool newValue )
+    private void GrabReleaseObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources  inputSources, bool newValue)
     {
+        hittedObj = pointerRef.transform;
         if (newValue)
         {
-            hittedObj = pointerRef.GetHitedObject();
-            if (hittedObj.CompareTag(interactableObjTag) && !objectAttached)
+            if (hittedObj.CompareTag(interactableObjTag))
             {
                 hittedObj.parent = rightController.transform;
                 objectAttached = true;
