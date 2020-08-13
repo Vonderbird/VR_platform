@@ -23,6 +23,8 @@ namespace Valve.VR
         
         private static SteamVR_Input_ActionSet_buggy p_buggy;
         
+        private static SteamVR_Input_ActionSet_ObjInteraction p_ObjInteraction;
+        
         public static SteamVR_Input_ActionSet_default _default
         {
             get
@@ -47,15 +49,25 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Input_ActionSet_ObjInteraction ObjInteraction
+        {
+            get
+            {
+                return SteamVR_Actions.p_ObjInteraction.GetCopy<SteamVR_Input_ActionSet_ObjInteraction>();
+            }
+        }
+        
         private static void StartPreInitActionSets()
         {
             SteamVR_Actions.p__default = ((SteamVR_Input_ActionSet_default)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_default>("/actions/default")));
             SteamVR_Actions.p_platformer = ((SteamVR_Input_ActionSet_platformer)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_platformer>("/actions/platformer")));
             SteamVR_Actions.p_buggy = ((SteamVR_Input_ActionSet_buggy)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_buggy>("/actions/buggy")));
+            SteamVR_Actions.p_ObjInteraction = ((SteamVR_Input_ActionSet_ObjInteraction)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_ObjInteraction>("/actions/ObjInteraction")));
             Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
                     SteamVR_Actions._default,
                     SteamVR_Actions.platformer,
-                    SteamVR_Actions.buggy};
+                    SteamVR_Actions.buggy,
+                    SteamVR_Actions.ObjInteraction};
         }
     }
 }
