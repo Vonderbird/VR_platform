@@ -1,8 +1,10 @@
 ﻿//////////////////////////////////////////////////////
+// 
 // desc:    Option Menu for object that is selected
 //          will pops up on your vr controller
 //
 // author:  amirardroudi
+//
 //////////////////////////////////////////////////////
 
 using UnityEngine;
@@ -13,7 +15,8 @@ using Valve.VR.InteractionSystem;
 public class OptionMenu : MonoBehaviour
 {
     public SteamVR_Action_Boolean OpenOptionAction;
-    public Hand hand;
+    public Hand rightHand;
+    public Hand leftHand;
     
     public Transform SelectedObject;
     public bool OptionMenuIsVisible = false;
@@ -25,6 +28,7 @@ public class OptionMenu : MonoBehaviour
 
     private Quaternion orginalRotation;
 
+    private float currentDisControllers;
     private void Awake() 
     {
         orginalRotation = transform.rotation;    
@@ -36,13 +40,13 @@ public class OptionMenu : MonoBehaviour
             Debug.LogError("<b>[StreamVR Interaction]</b> No open OptionMenu action assigned!");
             return;
         }
-        OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  hand.handType);
+        OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  rightHand.handType);
     }
 
     private void OnDisable()
     {
         if(OpenOptionAction != null)
-            OpenOptionAction.RemoveOnChangeListener(ActivateOptionMenu, hand.handType);
+            OpenOptionAction.RemoveOnChangeListener(ActivateOptionMenu, rightHand.handType);
     }
 
     private void Update()
@@ -50,7 +54,8 @@ public class OptionMenu : MonoBehaviour
         // set rotation of option menu related to camera
         UpdateRotation();
         SelectedObject = pointerRef.GetHitedObject();
-
+        
+        Debug.Log("Distance of controllers : " + UpdateDisControllers());
     }
 
     // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
@@ -62,7 +67,6 @@ public class OptionMenu : MonoBehaviour
         {
             SyncOptionToObject();
         }
-
     }
     // ================================================================================
     
@@ -92,14 +96,32 @@ public class OptionMenu : MonoBehaviour
         transform.rotation = headset.rotation * orginalRotation;
     }
 
+    private float UpdateDisControllers()
+    {
+        float distance = Vector3.SqrMagnitude(leftHand.transform.position - rightHand.transform.position);
+        
+        return distance;
+    }
     
-    public void DestroyObject()
+    // ====================== Object functions ======================  
+    
+    private void DestroyObject()
     {
         var options = SelectedObject.GetComponent<Interactable>();
         if(options != null)
             options.DestroyObject();
     }
 
+    private void ScaleObject()
+    {
+        // if both controller grab pressed
+            // cash distance of controllers when grab on both controllers pressed
+                // if cashedDistance < currentDisControllers
+                    //scale object
+                    
+        
+    }
+    
     
     
 }
