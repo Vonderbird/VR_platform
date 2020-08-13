@@ -14,24 +14,28 @@ using Valve.VR.InteractionSystem;
 
 public class OptionMenu : MonoBehaviour
 {
+    [Header("VR References")]
     public SteamVR_Action_Boolean OpenOptionAction;
-    public Hand rightHand;
-    public Hand leftHand;
-    
-    public Transform SelectedObject;
-    public bool OptionMenuIsVisible = false;
-
+    public Transform leftController;
+    public Transform rightController;
     public Transform headset;
     public Pointer pointerRef;
+    
+    [Header("UI References")]
     public Button deleteButton;
     public Slider gravitySlider;
-
+    
+    private Hand rightHand;
+    private Hand leftHand;
+    private Transform SelectedObject;
     private Quaternion orginalRotation;
-
     private float currentDisControllers;
+    
     private void Awake() 
     {
-        orginalRotation = transform.rotation;    
+        orginalRotation = transform.rotation;
+        leftHand  = leftController.GetComponent<Hand>();
+        rightHand = rightController.GetComponent<Hand>();
     }
     private void OnEnable()
     {
@@ -98,7 +102,7 @@ public class OptionMenu : MonoBehaviour
 
     private float UpdateDisControllers()
     {
-        float distance = Vector3.SqrMagnitude(leftHand.transform.position - rightHand.transform.position);
+        float distance = Vector3.SqrMagnitude(leftController.position - rightController.position);
         
         return distance;
     }
