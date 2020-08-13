@@ -57,6 +57,10 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_buggy_Reset;
         
+        private static SteamVR_Action_Boolean p_objInteraction_ScaleLeft;
+        
+        private static SteamVR_Action_Boolean p_objInteraction_ScaleRight;
+        
         public static SteamVR_Action_Boolean default_InteractUI
         {
             get
@@ -217,6 +221,22 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean objInteraction_ScaleLeft
+        {
+            get
+            {
+                return SteamVR_Actions.p_objInteraction_ScaleLeft.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean objInteraction_ScaleRight
+        {
+            get
+            {
+                return SteamVR_Actions.p_objInteraction_ScaleRight.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -239,7 +259,9 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Steering,
                     SteamVR_Actions.buggy_Throttle,
                     SteamVR_Actions.buggy_Brake,
-                    SteamVR_Actions.buggy_Reset};
+                    SteamVR_Actions.buggy_Reset,
+                    SteamVR_Actions.objInteraction_ScaleLeft,
+                    SteamVR_Actions.objInteraction_ScaleRight};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -259,7 +281,9 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Steering,
                     SteamVR_Actions.buggy_Throttle,
                     SteamVR_Actions.buggy_Brake,
-                    SteamVR_Actions.buggy_Reset};
+                    SteamVR_Actions.buggy_Reset,
+                    SteamVR_Actions.objInteraction_ScaleLeft,
+                    SteamVR_Actions.objInteraction_ScaleRight};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -278,7 +302,9 @@ namespace Valve.VR
                     SteamVR_Actions.default_OptionMenu,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
-                    SteamVR_Actions.buggy_Reset};
+                    SteamVR_Actions.buggy_Reset,
+                    SteamVR_Actions.objInteraction_ScaleLeft,
+                    SteamVR_Actions.objInteraction_ScaleRight};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.default_Squeeze,
                     SteamVR_Actions.buggy_Throttle};
@@ -305,7 +331,9 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Steering,
                     SteamVR_Actions.buggy_Throttle,
                     SteamVR_Actions.buggy_Brake,
-                    SteamVR_Actions.buggy_Reset};
+                    SteamVR_Actions.buggy_Reset,
+                    SteamVR_Actions.objInteraction_ScaleLeft,
+                    SteamVR_Actions.objInteraction_ScaleRight};
         }
         
         private static void PreInitActions()
@@ -330,6 +358,8 @@ namespace Valve.VR
             SteamVR_Actions.p_buggy_Throttle = ((SteamVR_Action_Single)(SteamVR_Action.Create<SteamVR_Action_Single>("/actions/buggy/in/Throttle")));
             SteamVR_Actions.p_buggy_Brake = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/buggy/in/Brake")));
             SteamVR_Actions.p_buggy_Reset = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/buggy/in/Reset")));
+            SteamVR_Actions.p_objInteraction_ScaleLeft = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/ObjInteraction/in/ScaleLeft")));
+            SteamVR_Actions.p_objInteraction_ScaleRight = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/ObjInteraction/in/ScaleRight")));
         }
     }
 }
