@@ -16,6 +16,9 @@ public class OptionMenu : MonoBehaviour
 {
     [Header("VR References")]
     public SteamVR_Action_Boolean OpenOptionAction;
+    public SteamVR_Action_Boolean scalePadActionLeft;
+    public SteamVR_Action_Boolean scalePadActionRight;
+    
     public Transform leftController;
     public Transform rightController;
     public Transform headset;
@@ -45,6 +48,7 @@ public class OptionMenu : MonoBehaviour
             return;
         }
         OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  rightHand.handType);
+        
     }
 
     private void OnDisable()
@@ -116,8 +120,9 @@ public class OptionMenu : MonoBehaviour
             options.DestroyObject();
     }
 
-    private void ScaleObject()
+    private void ScaleObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool state)
     {
+        
         // if both controller grab pressed
             // cash distance of controllers when grab on both controllers pressed
                 // if cashedDistance < currentDisControllers
