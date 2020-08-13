@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour
 
     public void DestroyObject()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     public void AddRigidBody(float gravityAmount)
