@@ -91,7 +91,7 @@ public class OptionMenu : MonoBehaviour
     // ====================== OPTION MENU POSITION ======================  
     private void SetOptionMenuPos()
     {
-        transform.position = SelectedObject.position + Vector3.right * 1.5f;
+        transform.position = SelectedObject.position + Vector3.up * 1.5f;
     }
 
     // ====================== OPTION MENU POSITION ======================  
@@ -122,7 +122,6 @@ public class OptionMenu : MonoBehaviour
             // cash distance of controllers when grab on both controllers pressed
                 // if cashedDistance < currentDisControllers
                     //scale object
-                    
         
     }
     

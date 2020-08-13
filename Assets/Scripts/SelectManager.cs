@@ -27,7 +27,7 @@ public class SelectManager : MonoBehaviour
     void HighlightObject()
     {
         Transform obj = pointerRef.GetHitedObject();
-        
+        if (obj == null) return;
         // dehighlight
         if(highlightedObject != null)
         {
