@@ -64,6 +64,7 @@ public class OptionMenu : MonoBehaviour
         SelectedObject = pointerRef.GetHitedObject();
         
         Debug.Log("Distance of controllers : " + UpdateDisControllers());
+        ScaleObject();
     }
 
     // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
@@ -120,9 +121,13 @@ public class OptionMenu : MonoBehaviour
             options.DestroyObject();
     }
 
-    private void ScaleObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool state)
+    private void ScaleObject()
     {
-        
+        if (scalePadActionLeft.state && scalePadActionRight.state)
+        {
+            
+            Debug.Log("both trigger as scaling action pressed!");
+        }
         // if both controller grab pressed
             // cash distance of controllers when grab on both controllers pressed
                 // if cashedDistance < currentDisControllers
