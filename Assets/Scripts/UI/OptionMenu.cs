@@ -26,7 +26,8 @@ public class OptionMenu : MonoBehaviour
     
     [Header("UI References")]
     public Button deleteButton;
-    public Slider gravitySlider;
+    public Slider massSlider;
+    public Toggle gravityToggle;
     
     private Hand rightHand;
     private Hand leftHand;
@@ -49,6 +50,7 @@ public class OptionMenu : MonoBehaviour
         }
         OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  rightHand.handType);
         
+        gravityToggle.onValueChanged.AddListener(delegate { UseGravity(gravityToggle);});
     }
 
     private void OnDisable()
@@ -87,7 +89,8 @@ public class OptionMenu : MonoBehaviour
         // set slider value from mass of selected object rigidbody.mass
         if (SelectedObject.GetComponent<Rigidbody>() != null)
         {
-            gravitySlider.value = SelectedObject.GetComponent<Rigidbody>().mass;    
+            massSlider.value = SelectedObject.GetComponent<Rigidbody>().mass;
+            // TODO: sync the gravity property
         }
 
         SetOptionMenuPos();
@@ -113,14 +116,23 @@ public class OptionMenu : MonoBehaviour
     }
     
     // ====================== Object functions ======================  
-    
+    private void UseGravity(Toggle toggle)
+    {
+        var interations = SelectedObject.GetComponent<Interactable>();
+        if (interations != null)
+        {
+            interations.Gravity(toggle.isOn);
+            Debug.Log("object " + SelectedObject.name + "| gravity: " + toggle.isOn);
+        }
+    }
     private void DestroyObject()
     {
-        var options = SelectedObject.GetComponent<Interactable>();
-        if(options != null)
-            options.DestroyObject();
+        var interations = SelectedObject.GetComponent<Interactable>();
+        if(interations != null)
+            interations.DestroyObject();
     }
-
+    
+    
     private void ScaleObject()
     {
         if (scalePadActionLeft.GetState(leftHand.handType) && scalePadActionRight.GetState(rightHand.handType))

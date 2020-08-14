@@ -18,26 +18,30 @@ public class Interactable : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void AddRigidBody(float gravityAmount)
+    /// <summary>
+    /// Enable gravity, it will add rigidbody component if there is no component. 
+    /// </summary>
+    /// <param name="state">get state of toggle and set it to state of gravity</param>
+    public void Gravity(bool state)
     {
-        rigidRef = gameObject.AddComponent<Rigidbody>();
-    }
+        if (!rigidRef)
+            rigidRef = gameObject.AddComponent<Rigidbody>();
 
-    public void RemoveRigidBody()
-    {
-        //if gravity slider in option menu was zero
-            //setRigidbody  to kinematic
-            
+        rigidRef.useGravity = state;
     }
-    public void ModifyGravity(float gravityAmount)
+    
+    public void ModifyMass(float massAmount)
     {
-        if (gravityAmount <= 0)
+        if (!rigidRef)
+            rigidRef = gameObject.AddComponent<Rigidbody>();
+        
+        if (massAmount <= 0)
         {
-            rigidRef.isKinematic = true;
+            rigidRef.mass = 0;
         }
         else
         {
-            rigidRef.mass = gravityAmount;
+            rigidRef.mass = massAmount;
         }
     }
     
