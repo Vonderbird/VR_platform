@@ -123,7 +123,7 @@ public class OptionMenu : MonoBehaviour
         if (interations != null)
         {
             interations.Gravity(toggle.isOn);
-            Debug.Log("object " + SelectedObject.name + "| gravity: " + toggle.isOn);
+            Debug.Log("object " + SelectedObject.name + "| gravity: " + SelectedObject.GetComponent<Rigidbody>().useGravity);
         }
     }
 
@@ -132,6 +132,8 @@ public class OptionMenu : MonoBehaviour
         var interations = SelectedObject.GetComponent<Interactable>();
         if (interations != null)
         {
+            
+            Debug.Log("object " + SelectedObject.name + "| mass: " +SelectedObject.GetComponent<Rigidbody>().mass);
             interations.ModifyMass(massSlider.value);
         }
     }

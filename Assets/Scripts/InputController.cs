@@ -63,14 +63,23 @@ public class InputController : MonoBehaviour
         
         if (newValue)
         {
-            Debug.Log( hittedObj + " - Object is about to be grabbed!" );
             if (!hittedObj.CompareTag(interactableObjTag) && !objectAttached ) return;
+            
+            //disable gravity when grabbing object
+            var objRigid = hittedObj.GetComponent<Rigidbody>();
+            if (objRigid)
+                objRigid.useGravity = false;
+            
             hittedObj.parent = rightController.transform;
             objectAttached = true;
         }
         // if grab released
         else
         {
+            var objRigid = hittedObj.GetComponent<Rigidbody>();
+            if (objRigid && !objRigid.useGravity)
+                objRigid.useGravity = true;
+            
             hittedObj.parent = null;
             objectAttached = false;
         }
