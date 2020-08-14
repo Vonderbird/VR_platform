@@ -92,6 +92,14 @@
     {
       "name": "/actions/ObjInteraction/in/ScaleRight",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/ObjInteraction/in/PoseRight",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/ObjInteraction/in/PoseLeft",
+      "type": "pose"
     }
   ],
   "action_sets": [

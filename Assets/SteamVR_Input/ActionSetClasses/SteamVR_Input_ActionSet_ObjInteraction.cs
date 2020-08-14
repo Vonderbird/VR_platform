@@ -32,5 +32,21 @@ namespace Valve.VR
                 return SteamVR_Actions.objInteraction_ScaleRight;
             }
         }
+        
+        public virtual SteamVR_Action_Pose PoseRight
+        {
+            get
+            {
+                return SteamVR_Actions.objInteraction_PoseRight;
+            }
+        }
+        
+        public virtual SteamVR_Action_Pose PoseLeft
+        {
+            get
+            {
+                return SteamVR_Actions.objInteraction_PoseLeft;
+            }
+        }
     }
 }
