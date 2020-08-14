@@ -34,7 +34,11 @@ public class OptionMenu : MonoBehaviour
     private Transform SelectedObject;
     private Quaternion orginalRotation;
     private float currentDisControllers;
+
+
     
+
+    #region UnityEvents
     private void Awake() 
     {
         orginalRotation = transform.rotation;
@@ -63,11 +67,10 @@ public class OptionMenu : MonoBehaviour
     {
         // set rotation of option menu related to camera
         UpdateRotation();
+        // update selectedObject cached
         SelectedObject = pointerRef.GetHitedObject();
-        
-        Debug.Log("Distance of controllers : " + UpdateDisControllers());
-        ScaleObject();
     }
+    #endregion
 
     // ================== CALL WHEN CLICK ON MENU BUTTON CONTROLLER ==================   
     private void ActivateOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
@@ -86,13 +89,15 @@ public class OptionMenu : MonoBehaviour
         // Bind Destroy function to delete button
         deleteButton.onClick.AddListener(DestroyObject);
         
-        // set slider value from mass of selected object rigidbody.mass
-        if (SelectedObject.GetComponent<Rigidbody>() != null)
+        // sync object rigidbody values with UI
+        var objRigid = SelectedObject.GetComponent<Rigidbody>();
+        if (objRigid != null)
         {
-            massSlider.value = SelectedObject.GetComponent<Rigidbody>().mass;
-            // TODO: sync the gravity property
+            massSlider.value = objRigid.mass;
+            gravityToggle.isOn = objRigid.useGravity;
         }
-
+        
+        //sync position of option menu on top of object
         SetOptionMenuPos();
     }
     
@@ -102,20 +107,14 @@ public class OptionMenu : MonoBehaviour
         transform.position = SelectedObject.position + Vector3.up * 1.5f;
     }
 
-    // ====================== OPTION MENU POSITION ======================  
+    // ====================== OPTION MENU ROTATION ======================  
     private void UpdateRotation()
     {
         transform.rotation = headset.rotation * orginalRotation;
     }
 
-    private float UpdateDisControllers()
-    {
-        float distance = Vector3.SqrMagnitude(leftController.position - rightController.position);
-        
-        return distance;
-    }
     
-    // ====================== Object functions ======================  
+    // ====================== Gravity ======================  
     private void UseGravity(Toggle toggle)
     {
         var interations = SelectedObject.GetComponent<Interactable>();
@@ -125,6 +124,8 @@ public class OptionMenu : MonoBehaviour
             Debug.Log("object " + SelectedObject.name + "| gravity: " + toggle.isOn);
         }
     }
+    
+    // ====================== Destroy Object ======================  
     private void DestroyObject()
     {
         var interations = SelectedObject.GetComponent<Interactable>();
@@ -132,21 +133,25 @@ public class OptionMenu : MonoBehaviour
             interations.DestroyObject();
     }
     
-    
+        
+    // ====================== Scale Object ======================  
     private void ScaleObject()
     {
         if (scalePadActionLeft.GetState(leftHand.handType) && scalePadActionRight.GetState(rightHand.handType))
         {
-            
             Debug.Log("both trigger as scaling action pressed!");
         }
         // if both controller grab pressed
             // cash distance of controllers when grab on both controllers pressed
                 // if cashedDistance < currentDisControllers
                     //scale object
-        
     }
     
+    private float UpdateDisControllers()
+    {
+        float distance = Vector3.SqrMagnitude(leftController.position - rightController.position);
+        return distance;
+    }
     
     
 }

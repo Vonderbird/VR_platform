@@ -274,8 +274,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &3005311538109446586
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +616,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4342825640414235282}
-  m_LocalRotation: {x: 0.07098941, y: -0, z: -0, w: 0.99747705}
+  m_LocalRotation: {x: 0.07099255, y: 0, z: 0, w: 0.9974769}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0025, y: 0.0025000009, z: 0.0025000009}
   m_Children:
@@ -691,20 +702,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenOptionAction:
-    actionPath: 
+    actionPath: /actions/default/in/OptionMenu
     needsReinit: 0
   scalePadActionLeft:
     actionPath: 
-    needsReinit: 0
+    needsReinit: 1
   scalePadActionRight:
     actionPath: 
-    needsReinit: 0
+    needsReinit: 1
   leftController: {fileID: 0}
   rightController: {fileID: 0}
   headset: {fileID: 0}
   pointerRef: {fileID: 0}
-  deleteButton: {fileID: 0}
-  gravitySlider: {fileID: 0}
+  deleteButton: {fileID: 8691346821364434289}
+  massSlider: {fileID: 4650018264568069606}
+  gravityToggle: {fileID: 1454518311220153039}
 --- !u!1 &5258539830815910932
 GameObject:
   m_ObjectHideFlags: 0
