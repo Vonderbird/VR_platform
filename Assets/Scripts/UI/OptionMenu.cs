@@ -123,7 +123,7 @@ public class OptionMenu : MonoBehaviour
 
     private void ScaleObject()
     {
-        if (scalePadActionLeft.state && scalePadActionRight.state)
+        if (scalePadActionLeft.GetState(leftHand.handType) && scalePadActionRight.GetState(rightHand.handType))
         {
             
             Debug.Log("both trigger as scaling action pressed!");
