@@ -55,6 +55,8 @@ public class OptionMenu : MonoBehaviour
         OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  rightHand.handType);
         
         gravityToggle.onValueChanged.AddListener(delegate { UseGravity(gravityToggle);});
+        massSlider.onValueChanged.AddListener(delegate { MassModifier();});
+        
     }
 
     private void OnDisable()
@@ -124,7 +126,15 @@ public class OptionMenu : MonoBehaviour
             Debug.Log("object " + SelectedObject.name + "| gravity: " + toggle.isOn);
         }
     }
-    
+
+    private void MassModifier()
+    {
+        var interations = SelectedObject.GetComponent<Interactable>();
+        if (interations != null)
+        {
+            interations.ModifyMass(massSlider.value);
+        }
+    }
     // ====================== Destroy Object ======================  
     private void DestroyObject()
     {
