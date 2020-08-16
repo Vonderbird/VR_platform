@@ -3,9 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct cachedRigidbody
+{
+    public float mass;
+    public bool gravityState;
+}
 public class Interactable : MonoBehaviour
 {
     private Rigidbody rigidRef;
+    public cachedRigidbody cachedRigid;
+
     private void OnEnable()
     {
         var rigid = GetComponent<Rigidbody>();
@@ -28,6 +35,8 @@ public class Interactable : MonoBehaviour
             rigidRef = gameObject.AddComponent<Rigidbody>();
 
         rigidRef.useGravity = state;
+        cachedRigid.gravityState = rigidRef.useGravity;
+
     }
     
     public void ModifyMass(float massAmount)
@@ -43,10 +52,27 @@ public class Interactable : MonoBehaviour
         {
             rigidRef.mass = massAmount;
         }
+        
+        cachedRigid.mass = rigidRef.mass;
+
     }
-    
-    
-    
-    
-    
+
+    public bool GetGravityState()
+    {
+        return rigidRef.useGravity;
+    }
+
+    public float GetMass()
+    {
+        return rigidRef.mass;
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        return rigidRef;
+    }
+
+
+
+
 }

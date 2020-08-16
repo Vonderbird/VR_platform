@@ -7,10 +7,13 @@
 //
 //////////////////////////////////////////////////////
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+
+
 
 public class OptionMenu : MonoBehaviour
 {
@@ -32,7 +35,7 @@ public class OptionMenu : MonoBehaviour
     private Hand rightHand;
     private Hand leftHand;
     private Transform SelectedObject;
-    private Interactable selectedobjInterations;
+    private Interactable selectedobjInteraction;
     private Quaternion orginalRotation;
     private float currentDisControllers;
 
@@ -50,7 +53,6 @@ public class OptionMenu : MonoBehaviour
     {
         if (OpenOptionAction == null)
         {
-            Debug.LogError("<b>[StreamVR Interaction]</b> No open OptionMenu action assigned!");
             return;
         }
         OpenOptionAction.AddOnChangeListener(ActivateOptionMenu,  rightHand.handType);
@@ -79,7 +81,7 @@ public class OptionMenu : MonoBehaviour
     {
         GetComponent<Canvas>().enabled = newValue;
         SelectedObject = pointerRef.GetHitedObject();
-        selectedobjInterations = SelectedObject.GetComponent<Interactable>();
+        selectedobjInteraction = SelectedObject.GetComponent<Interactable>();
 
         if (newValue)
         {
@@ -121,28 +123,23 @@ public class OptionMenu : MonoBehaviour
     // ====================== Gravity ======================  
     private void UseGravity(Toggle toggle)
     {
-        if (selectedobjInterations != null)
-        {
-            selectedobjInterations.Gravity(toggle.isOn);
-            Debug.Log("object " + SelectedObject.name + "| gravity: " + SelectedObject.GetComponent<Rigidbody>().useGravity);
-        }
+        if (selectedobjInteraction == null) return;
+        
+        selectedobjInteraction.Gravity(toggle.isOn);
     }
 
     private void MassModifier()
     {
-        
-        if (selectedobjInterations != null)
+        if (selectedobjInteraction != null)
         {
-            
-            Debug.Log("object " + SelectedObject.name + "| mass: " +SelectedObject.GetComponent<Rigidbody>().mass);
-            selectedobjInterations.ModifyMass(massSlider.value);
+            selectedobjInteraction.ModifyMass(massSlider.value);
         }
     }
     // ====================== Destroy Object ======================  
     private void DestroyObject()
     {
-        if(selectedobjInterations != null)
-            selectedobjInterations.DestroyObject();
+        if(selectedobjInteraction != null)
+            selectedobjInteraction.DestroyObject();
     }
     
         
@@ -164,6 +161,5 @@ public class OptionMenu : MonoBehaviour
         float distance = Vector3.SqrMagnitude(leftController.position - rightController.position);
         return distance;
     }
-    
     
 }

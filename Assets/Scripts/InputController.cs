@@ -60,16 +60,16 @@ public class InputController : MonoBehaviour
 
     private void GrabReleaseObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources  inputSources, bool newValue)
     {
-        
-        var objRigid = hittedObj.GetComponent<Rigidbody>();
-        bool gravityState = objRigid.useGravity;
+        var intractable = hittedObj.GetComponent<Interactable>();
+        var rigid = intractable.GetRigidbody();
+ 
         if (newValue)
         {
-            if (!hittedObj.CompareTag(interactableObjTag) && !objectAttached ) return;
+            if (!hittedObj.CompareTag(interactableObjTag) && !objectAttached) return;
             
             //disable gravity when grabbing object
-            if (objRigid)
-                objRigid.useGravity = false;
+            if (rigid)
+                rigid.useGravity = false;
             
             hittedObj.parent = rightController.transform;
             objectAttached = true;
@@ -77,8 +77,9 @@ public class InputController : MonoBehaviour
         // if grab released
         else
         {
-            if (objRigid)
-                objRigid.useGravity = gravityState;
+            //set gravity to previous state before grabbing
+            if (rigid)
+                rigid.useGravity = intractable.cachedRigid.gravityState;
             
             hittedObj.parent = null;
             objectAttached = false;

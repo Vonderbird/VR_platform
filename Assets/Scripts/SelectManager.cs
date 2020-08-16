@@ -50,7 +50,7 @@ public class SelectManager : MonoBehaviour
                 
             defaultMaterial = Renderer.material;
             Renderer.material = highlightMaterial;
-
+                                                        
             highlightedObject = obj;
         }
         
