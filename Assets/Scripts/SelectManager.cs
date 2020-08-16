@@ -27,17 +27,27 @@ public class SelectManager : MonoBehaviour
     void HighlightObject()
     {
         Transform obj = pointerRef.GetHitedObject();
-        if (obj == null) return;
+        if (obj == null)
+        {
+            var renderer = highlightedObject.GetComponent<Renderer>();
+            renderer.material = defaultMaterial;
+            defaultMaterial = null;
+            highlightedObject = null;
+            return;
+        }
         // dehighlight
         if(highlightedObject != null)
         {
             if (highlightedObject.GetInstanceID() == obj.GetInstanceID())
                 return;
-            
-            var renderer = highlightedObject.GetComponent<Renderer>();
-            renderer.material = defaultMaterial;
-            defaultMaterial = null;
-            highlightedObject = null;
+            else
+            {
+                
+                var renderer = highlightedObject.GetComponent<Renderer>();
+                renderer.material = defaultMaterial;
+                defaultMaterial = null;
+                highlightedObject = null;
+            }
         }
         
         // highlight

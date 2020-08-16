@@ -61,6 +61,10 @@ public class Pointer : MonoBehaviour
         {
             hitedObject = hitedRay.transform;
         }
+        else
+        {
+            hitedObject =  null;
+        }
 
         return hitedRay;
     }
