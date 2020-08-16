@@ -32,6 +32,7 @@ public class OptionMenu : MonoBehaviour
     private Hand rightHand;
     private Hand leftHand;
     private Transform SelectedObject;
+    private Interactable selectedobjInterations;
     private Quaternion orginalRotation;
     private float currentDisControllers;
 
@@ -78,7 +79,8 @@ public class OptionMenu : MonoBehaviour
     {
         GetComponent<Canvas>().enabled = newValue;
         SelectedObject = pointerRef.GetHitedObject();
-        
+        selectedobjInterations = SelectedObject.GetComponent<Interactable>();
+
         if (newValue)
         {
             SyncOptionToObject();
@@ -119,30 +121,28 @@ public class OptionMenu : MonoBehaviour
     // ====================== Gravity ======================  
     private void UseGravity(Toggle toggle)
     {
-        var interations = SelectedObject.GetComponent<Interactable>();
-        if (interations != null)
+        if (selectedobjInterations != null)
         {
-            interations.Gravity(toggle.isOn);
+            selectedobjInterations.Gravity(toggle.isOn);
             Debug.Log("object " + SelectedObject.name + "| gravity: " + SelectedObject.GetComponent<Rigidbody>().useGravity);
         }
     }
 
     private void MassModifier()
     {
-        var interations = SelectedObject.GetComponent<Interactable>();
-        if (interations != null)
+        
+        if (selectedobjInterations != null)
         {
             
             Debug.Log("object " + SelectedObject.name + "| mass: " +SelectedObject.GetComponent<Rigidbody>().mass);
-            interations.ModifyMass(massSlider.value);
+            selectedobjInterations.ModifyMass(massSlider.value);
         }
     }
     // ====================== Destroy Object ======================  
     private void DestroyObject()
     {
-        var interations = SelectedObject.GetComponent<Interactable>();
-        if(interations != null)
-            interations.DestroyObject();
+        if(selectedobjInterations != null)
+            selectedobjInterations.DestroyObject();
     }
     
         
