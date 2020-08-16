@@ -70,7 +70,6 @@ public class OptionMenu : MonoBehaviour
         // set rotation of option menu related to camera
         UpdateRotation();
         // update selectedObject cached
-        SelectedObject = pointerRef.GetHitedObject();
     }
     #endregion
 
@@ -78,6 +77,7 @@ public class OptionMenu : MonoBehaviour
     private void ActivateOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
         GetComponent<Canvas>().enabled = newValue;
+        SelectedObject = pointerRef.GetHitedObject();
         
         if (newValue)
         {
