@@ -28,10 +28,10 @@ public class OptionMenu : MonoBehaviour
     public Pointer pointerRef;
     
     [Header("UI References")]
-    public Button deleteButton;
-    public Slider massSlider;
-    public Toggle gravityToggle;
-    
+    public Toggle gravityToggle;          // Toggling gravity in object's rigidbody
+    public Slider massSlider;             // changing mass in object's rigidbody
+    public Button rigidbodybutton;        //for removing rigidbody
+    public Button deleteButton;           // Delete gameObject
     private Hand rightHand;
     private Hand leftHand;
     private Transform SelectedObject;
@@ -59,7 +59,7 @@ public class OptionMenu : MonoBehaviour
         
         gravityToggle.onValueChanged.AddListener(delegate { UseGravity(gravityToggle);});
         massSlider.onValueChanged.AddListener(delegate { MassModifier();});
-        
+        rigidbodybutton.onClick.AddListener(RemoveRigidbody);
     }
 
     private void OnDisable()
@@ -72,7 +72,6 @@ public class OptionMenu : MonoBehaviour
     {
         // set rotation of option menu related to camera
         UpdateRotation();
-        // update selectedObject cached
     }
     #endregion
 
@@ -80,9 +79,12 @@ public class OptionMenu : MonoBehaviour
     private void ActivateOptionMenu(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSources, bool newValue)
     {
         GetComponent<Canvas>().enabled = newValue;
+        
+        //get reference of hitted object by raycast
         SelectedObject = pointerRef.GetHitedObject();
+        
         selectedobjInteraction = SelectedObject.GetComponent<Interactable>();
-
+        
         if (newValue)
         {
             SyncOptionToObject();
@@ -127,7 +129,8 @@ public class OptionMenu : MonoBehaviour
         
         selectedobjInteraction.Gravity(toggle.isOn);
     }
-
+    
+    // ====================== Mass ======================  
     private void MassModifier()
     {
         if (selectedobjInteraction != null)
@@ -135,12 +138,22 @@ public class OptionMenu : MonoBehaviour
             selectedobjInteraction.ModifyMass(massSlider.value);
         }
     }
+    
+    // ====================== Remove Rigidbody ======================  
+    private void RemoveRigidbody()
+    {
+        if(selectedobjInteraction.GetRigidbody())
+            selectedobjInteraction.RemoveRigidbody();
+    }
+    
+    
     // ====================== Destroy Object ======================  
     private void DestroyObject()
     {
         if(selectedobjInteraction != null)
             selectedobjInteraction.DestroyObject();
     }
+    
     
         
     // ====================== Scale Object ======================  

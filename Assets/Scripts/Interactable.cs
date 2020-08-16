@@ -54,9 +54,12 @@ public class Interactable : MonoBehaviour
         }
         
         cachedRigid.mass = rigidRef.mass;
-
     }
 
+    public void RemoveRigidbody()
+    {
+        Destroy(gameObject.GetComponent<Rigidbody>());
+    }
     public bool GetGravityState()
     {
         return rigidRef.useGravity;
