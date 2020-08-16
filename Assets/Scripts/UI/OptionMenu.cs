@@ -32,6 +32,8 @@ public class OptionMenu : MonoBehaviour
     public Slider massSlider;             // changing mass in object's rigidbody
     public Button rigidbodybutton;        //for removing rigidbody
     public Button deleteButton;           // Delete gameObject
+    public Slider scaleslider;            // change scale of object
+    
     private Hand rightHand;
     private Hand leftHand;
     private Transform SelectedObject;
@@ -59,6 +61,7 @@ public class OptionMenu : MonoBehaviour
         
         gravityToggle.onValueChanged.AddListener(delegate { UseGravity(gravityToggle);});
         massSlider.onValueChanged.AddListener(delegate { MassModifier();});
+        scaleslider.onValueChanged.AddListener(delegate { ChangeScale();});
         rigidbodybutton.onClick.AddListener(RemoveRigidbody);
     }
 
@@ -66,6 +69,11 @@ public class OptionMenu : MonoBehaviour
     {
         if(OpenOptionAction != null)
             OpenOptionAction.RemoveOnChangeListener(ActivateOptionMenu, rightHand.handType);
+        
+        gravityToggle.onValueChanged.RemoveListener(delegate { UseGravity(gravityToggle);});
+        massSlider.onValueChanged.RemoveListener(delegate { MassModifier();});
+        scaleslider.onValueChanged.RemoveListener(delegate { ChangeScale();});
+        rigidbodybutton.onClick.RemoveListener(RemoveRigidbody);
     }
 
     private void Update()
@@ -138,6 +146,17 @@ public class OptionMenu : MonoBehaviour
             selectedobjInteraction.ModifyMass(massSlider.value);
         }
     }
+    
+    // ====================== Change Scale ======================
+    private void ChangeScale()
+    {
+        if (selectedobjInteraction == null) return;
+        
+        selectedobjInteraction.ModifyScale(scaleslider.value);
+        
+    }
+    
+    
     
     // ====================== Remove Rigidbody ======================  
     private void RemoveRigidbody()

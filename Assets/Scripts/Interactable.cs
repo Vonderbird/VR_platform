@@ -75,6 +75,12 @@ public class Interactable : MonoBehaviour
         return rigidRef;
     }
 
+    public void ModifyScale(float sliderValue)
+    {
+        float scaleValue = Mathf.Lerp(0.1f, 10, sliderValue);
+        transform.localScale =new Vector3(scaleValue, scaleValue, scaleValue);
+    }
+
 
 
 
