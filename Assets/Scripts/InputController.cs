@@ -48,7 +48,7 @@ public class InputController : MonoBehaviour
             menuManagerRef.ShowMenu(SteamVR_Actions._default.MenuUI.state);
         }
 
-        hittedObj = pointerRef.GetHitedObject();
+//        hittedObj = pointerRef.GetHitedObject();
     }
 
     public void InstantiateObject(Transform objectPrefab)
@@ -60,6 +60,7 @@ public class InputController : MonoBehaviour
 
     private void GrabReleaseObject(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources  inputSources, bool newValue)
     {
+        hittedObj = pointerRef.GetHitedObject();
         var intractable = hittedObj.GetComponent<Interactable>();
         var rigid = intractable.GetRigidbody();
  
