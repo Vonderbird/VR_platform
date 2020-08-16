@@ -74,6 +74,7 @@ public class InputController : MonoBehaviour
             
             hittedObj.parent = rightController.transform;
             objectAttached = true;
+            Debug.Log(hittedObj.name + " Grabbed!");
         }
         // if grab released
         else
@@ -84,7 +85,9 @@ public class InputController : MonoBehaviour
             
             hittedObj.parent = null;
             objectAttached = false;
+            Debug.Log(hittedObj.name + " released from controller!");
             hittedObj = null;
+            
         }
 
     }
